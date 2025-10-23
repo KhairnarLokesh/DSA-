@@ -1,8 +1,9 @@
 public class ap {
     public static void main(String[] args) {
         Student s=new Student();
-        s.name=("lokesh");
+        s.name="lokesh";
         s.schoolname="sharda";
+        System.out.println(s.name);
 
         Student s1=new Student();
         System.out.println(s1.schoolname);

@@ -249,7 +249,7 @@ public class Linkedlist {
 
     public static  boolean Detectcycle(Node head){
         Node slow=head;
-        Node fast=head;
+        Node fast=head
 
         while(fast!=null && fast.next!=null){
             slow=slow.next;
