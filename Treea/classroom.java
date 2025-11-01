@@ -1,6 +1,5 @@
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class classroom {
     
@@ -145,70 +144,125 @@ public class classroom {
 
   
         }
-        static class Info{
-            int diam;
-            int ht;
+        // static class Info{
+        //     int diam;
+        //     int ht;
 
-        public Info(int diam,int ht) {
-            this.diam=diam;
-            this.ht=ht;
-        }
+        // public Info(int diam,int ht) {
+        //     this.diam=diam;
+        //     this.ht=ht;
+        // }
 
             
-        }
+        // }
 
-        public static Info diameter(Node root){
+        // public static Info diameter(Node root){
 
-            if(root==null){
-                return new Info(0,0);
-            }
-            Info leftInfo=diameter(root.left);
-            Info rightInfo=diameter(root.right);
+        //     if(root==null){
+        //         return new Info(0,0);
+        //     }
+        //     Info leftInfo=diameter(root.left);
+        //     Info rightInfo=diameter(root.right);
 
-            int diam=Math.max(Math.max(leftInfo.diam,rightInfo.diam),leftInfo.ht+rightInfo.ht+1);
-            int ht=Math.max(leftInfo.ht,rightInfo.ht)+1;
+        //     int diam=Math.max(Math.max(leftInfo.diam,rightInfo.diam),leftInfo.ht+rightInfo.ht+1);
+        //     int ht=Math.max(leftInfo.ht,rightInfo.ht)+1;
 
-            return new Info(diam,ht);
+        //     return new Info(diam,ht);
 
-        }
+        // }
 
-        public static boolean isIdentical(Node root,Node subRoot){
-            if(root==null && subRoot==null){
-                return true;
-            } 
-            else if(root ==null || subRoot==null || root.data!=subRoot.data){
-                return false;
-            }
-            if(!isIdentical(root.left, subRoot.left)){
-                return false;
-            }
-            if(!isIdentical(root.right, subRoot.right)){
-                return false;
-            }
+        // public static boolean isIdentical(Node root,Node subRoot){
+        //     if(root==null && subRoot==null){
+        //         return true;
+        //     } 
+        //     else if(root ==null || subRoot==null || root.data!=subRoot.data){
+        //         return false;
+        //     }
+        //     if(!isIdentical(root.left, subRoot.left)){
+        //         return false;
+        //     }
+        //     if(!isIdentical(root.right, subRoot.right)){
+        //         return false;
+        //     }
 
-            return true;
-        }
+        //     return true;
+        // }
 
-        public static boolean isSubtree(Node root,Node subRoot){
-            if(root==null){
-                return false;
-            }
-
-            if(root.data==subRoot.data){
-               if(isIdentical(root,subRoot)){
-                      return true;
+        // public static boolean isSubtree(Node root,Node subRoot){
+        //     if(root==null){
+        //         return false;
+        //     }
+ 
+        //     if(root.data==subRoot.data){
+        //        if(isIdentical(root,subRoot)){
+        //               return true;
                 
-               }
+        //        }
           
-            }
+        //     }
             
 
-             return isSubtree(root.left, subRoot) ||isSubtree(root.right, subRoot);
+        //      return isSubtree(root.left, subRoot) ||isSubtree(root.right, subRoot);
 
+        // }
+
+        static class Info{
+            Node node;
+            int hd;
+
+            Info(Node node,int hd){
+                this.node=node;
+                this.hd=hd;
+            }
         }
+        public static void TopView(Node root){
 
 
+            Queue<Info> q=new LinkedList<>();
+            HashMap<Integer,Node> map=new HashMap<>();
 
+            int min=0;
+            int max=0;
+            q.add(new Info(root,0));
+            q.add(null);
+
+
+            while(!q.isEmpty()){
+                Info curr=q.remove();
+                if(curr==null){
+                    if(q.isEmpty()){
+
+                        break;
+                    }
+                    else{
+                        q.add(null);
+                    }
+                }
+
+               else{
+                 if(!map.containsKey(curr.hd)){//first tie occurance
+                    map.put(curr.hd,curr.node);
+                }
+
+                if(curr.node.left != null){
+                    q.add(new Info(curr.node.left, curr.hd-1));
+                    min = Math.min(min,curr.hd-1);
+                }
+                if(curr.node.right!=null){
+                    q.add(new Info(curr.node.right,curr.hd+1));
+                        max=Math.max(max,curr.hd+1);
+                    
+                }
+
+            }
+               }
+            
+            for(int i=min;i<=max;i++){
+                System.out.print(map.get(i).data);
+            }
+            System.out.println( );
+        }
+       
 
 
     public static void main(String[] args) {
@@ -224,12 +278,12 @@ public class classroom {
        root.right.left=new Node(6);
        root.right.right=new Node(7);
 
+        TopView(root);
+    //    Node subRoot=new Node(2);
+    //    subRoot.left=new Node(4);
+    //    subRoot.right=new Node(5);
 
-       Node subRoot=new Node(2);
-       subRoot.left=new Node(4);
-       subRoot.right=new Node(5);
 
-
-       System.out.println(isIdentical(root, subRoot));
+    //    System.out.println(isIdentical(root, subRoot));
     }
 }
