@@ -368,6 +368,30 @@ public class classroom {
         }
 
 
+
+        public static int kthAncestor(Node root,int n,int k){
+          
+            if(root==null){
+                return -1;
+            }
+             if (root.data == n) {
+            return 0;
+        }
+
+            int leftdist=kthAncestor(root.left, n, k);
+            int rightdist=kthAncestor(root.right, n, k);
+            if(leftdist==-1 && rightdist==-1){
+                return -1;
+            }
+            int max=Math.max(leftdist,rightdist);
+            if(max+1==k){
+                System.out.println(root.data);
+            }
+            return max+1;
+
+        } 
+
+
     public static void main(String[] args) {
         
         /* 
@@ -380,9 +404,10 @@ public class classroom {
        root.left.right=new Node(5);
        root.right.left=new Node(6);
        root.right.right=new Node(7);
-       int n1=4,n2=6;
+       int n=5,k=2;
+       kthAncestor(root, n, k);
 
-       System.out.println(mindist(root, n1, n2));
+    //    System.out.println(mindist(root, n1, n2));
 
         // TopView(root);
     //    Node subRoot=new Node(2);
