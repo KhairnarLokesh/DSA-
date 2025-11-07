@@ -385,11 +385,11 @@ public class classroom {
             }
             int max=Math.max(leftdist,rightdist);
             if(max+1==k){
-                System.out.println(root.data);
+            System.out.println(root.data);
             }
             return max+1;
 
-        } 
+             } 
 
 
     public static void main(String[] args) {
