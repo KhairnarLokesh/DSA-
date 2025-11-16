@@ -124,7 +124,32 @@ import java.util.ArrayList;
                 preorder(root.left);
                 preorder(root.right);
             }
+            public static void getinorder(Node root,ArrayList<Integer> inorder){
+                if(root==null){
+                    return;
+                }
+                getinorder(root.left, inorder);
+                inorder5.add(root.data);
+            }
+            public static Node balancebst(Node root){
+                ArrayList<Integer> inorder5=new ArrayList<>();
 
+            }
+
+
+
+
+            public static Node createbst(int arr[],int st,int end){
+                if(st>end)
+                {
+                    return null;
+                }
+                int mid=(st+end)/2;
+                Node root=new  Node(arr[mid]);
+               root.left= createbst(arr, st, mid-1);
+                root.right= createbst(arr, mid+1, end);
+                return root;
+            }
 
             //mirror image question
 
@@ -154,15 +179,20 @@ import java.util.ArrayList;
     //         printroot2leaf(root,new ArrayList<>());
 
                     Node root=new Node(8);
-                    root.left=new Node(5);
+                    root.left=new Node(6);
+                    root.left.left=new Node(5);
+                    root.left.left.left=new Node(3);
                     root.right=new Node(10);
-                    root.left.left=new Node(3);
-                    root.left.right=new Node(6);
                     root.right.right=new Node(11);
+                    root.right.right.right=new Node(12);
 
 
-                root=createmirror(root);
-                preorder(root);
+                // root=createmirror(root);
+                // preorder(root);
+
+            // int arr[]={3,5,6,8,10,11,12};
+            // Node root=createbst(arr, 0, arr.length-1);
+            // preorder(root);
 
             }   
 
